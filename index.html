@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>رسالة العيد - جواب مختوم بقلب</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fceaea 0%, #f9cfb5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', 'Tahoma', 'Cairo', 'Amiri', system-ui, sans-serif;
+            padding: 16px;
+        }
+
+        /* الحاوية الرئيسية */
+        .letter-stage {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        /* ========== تصميم الرسالة المغلقة ========== */
+        .sealed-letter {
+            background: #fffef5;
+            border-radius: 28px;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px #ffe2bc inset;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        /* غلاف الرسالة الخارجي */
+        .envelope-front {
+            background: linear-gradient(135deg, #fff4e6, #ffe1c4);
+            border-radius: 28px;
+            padding: 2rem 1.5rem 2.2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ختم القلب الكبير */
+        .heart-stamp {
+            font-size: 85px;
+            display: inline-block;
+            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.2));
+            margin-bottom: 12px;
+            animation: gentleBeat 1.8s infinite ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes gentleBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .seal-title {
+            background: #ffede1;
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #b64516;
+            box-shadow: inset 0 1px 3px #ffcf9a, 0 3px 6px rgba(0,0,0,0.05);
+            margin-top: 8px;
+            backdrop-filter: blur(2px);
+        }
+
+        .click-hint {
+            margin-top: 28px;
+            font-size: 0.85rem;
+            color: #b45626;
+            background: #fef2e6;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ========== محتوى الرسالة الداخلي (ينزلق بعد الفتح) ========== */
+        .letter-inner {
+            max-height: 0;
+            opacity: 0;
+            padding: 0 24px;
+            background: #fffdf9;
+            border-radius: 0 0 28px 28px;
+            transition: max-height 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s ease, padding 0.4s;
+            overflow: hidden;
+            border-top: 0px solid #ffdfb8;
+        }
+
+        .letter-inner.open-inner {
+            max-height: 800px;   /* كبير بما يكفي للمحتوى */
+            opacity: 1;
+            padding: 28px 24px 38px;
+            border-top: 2px solid #ffcf9a;
+        }
+
+        /* تنسيق النص داخل الجواب */
+        .greeting-title {
+            font-size: 1.5rem;
+            color: #bb511d;
+            border-right: 5px solid #ff9966;
+            padding-right: 16px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* الشعر مع أنيميشن الطباعة */
+        .poem-box {
+            font-family: 'Amiri', 'Tahoma', 'Segoe UI', serif;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #3e2a1c;
+            background: #fffaf2;
+            padding: 18px 18px;
+            border-radius: 32px;
+            margin: 20px 0;
+            text-align: center;
+            white-space: pre-line;
+            direction: rtl;
+            border: 1px solid #ffe0bd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        /* أنيميشن الكتابة (typewriter) */
+        .typewriter-effect {
+            overflow: hidden;
+            border-left: none;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .typed-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: fadeUpWord 0.4s forwards;
+        }
+
+        @keyframes fadeUpWord {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dedication-name {
+            background: #ffefe2;
+            padding: 10px 20px;
+            border-radius: 60px;
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #bd4817;
+            margin-top: 6px;
+        }
+
+        .heart-decoration {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            letter-spacing: 6px;
+        }
+
+        /* بوب اب على شكل قلب (للكلمة السحرية) */
+        .magic-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.25s ease;
+            cursor: default;
+        }
+
+        .magic-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* القلب الكبير كنافذة */
+        .heart-window {
+            background: linear-gradient(145deg, #ffc8a2, #ffaa77);
+            width: 330px;
+            max-width: 85vw;
+            border-radius: 45% 45% 45% 45% / 55% 55% 45% 45%;
+            text-align: center;
+            padding: 35px 20px 45px;
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #ff8c42;
+            position: relative;
+            animation: popHeart 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        @keyframes popHeart {
+            0% { transform: scale(0.5) rotate(-6deg); opacity: 0; }
+            80% { transform: scale(1.02);}
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .heart-window h3 {
+            font-size: 1.8rem;
+            color: #8b2c16;
+            margin-bottom: 8px;
+        }
+
+        .magic-question {
+            background: #fff2e4;
+            border-radius: 50px;
+            padding: 10px;
+            margin: 18px 0;
+            font-weight: bold;
+            color: #b14512;
+        }
+
+        .magic-input {
+            width: 85%;
+            padding: 12px;
+            border-radius: 60px;
+            border: none;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: inherit;
+            background: #fffbf5;
+            border: 2px solid #ffbc7a;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .magic-input:focus {
+            border-color: #e35f21;
+            box-shadow: 0 0 0 3px #ffddb0;
+        }
+
+        .magic-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .magic-btn {
+            background: #d9531e;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .magic-btn.close-btn {
+            background: #9e451f;
+        }
+
+        .magic-btn:hover {
+            transform: scale(0.96);
+            background: #bf4313;
+        }
+
+        .error-msg {
+            color: #b12a0c;
+            background: #fff0e0;
+            border-radius: 40px;
+            padding: 5px;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* أبعاد متجاوبة */
+        @media (max-width: 550px) {
+            .envelope-front {
+                padding: 1.4rem 1rem 1.8rem;
+            }
+            .heart-stamp {
+                font-size: 68px;
+            }
+            .poem-box {
+                font-size: 1rem;
+                padding: 14px;
+            }
+            .greeting-title {
+                font-size: 1.2rem;
+            }
+            .letter-inner.open-inner {
+                padding: 20px 16px 30px;
+            }
+        }
+
+        /* مؤشر click */
+        .letter-stage {
+            cursor: pointer;
+        }
+
+        .disabled-click {
+            pointer-events: none;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #c08152;
+            margin-top: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="letter-stage" id="letterStage">
+    <!-- الرسالة المغلقة (القسم الذي سيتم الضغط عليه) -->
+    <div class="sealed-letter" id="sealedLetter">
+        <div class="envelope-front" id="envelopeFront">
+            <div class="heart-stamp">❤️‍🔥</div>
+            <div class="seal-title">جواب مختوم بقلب</div>
+            <div class="click-hint">
+                <span>👇 اضغط على الجواب لفتحه 👇</span>
+            </div>
+        </div>
+
+        <!-- المحتوى الداخلي (ينزلق مع أنيميشن بعد كتابة الكلمة السحرية) -->
+        <div class="letter-inner" id="letterInner">
+            <div class="greeting-title">
+                <span>📜</span> رسالة العيد
+            </div>
+            <div class="poem-box" id="poemContainer">
+                <!-- سيتم إدراج الأبيات بأنيميشن الطباعة لاحقاً -->
+            </div>
+            <div class="heart-decoration">♥ ♥ ♥</div>
+            <div style="text-align: center; margin-top: 16px;">
+                <span class="dedication-name" id="dedicationName">💌 إلى بسملة / بنوتي 💌</span>
+            </div>
+        </div>
+    </div>
+    <footer>✨ قلبُ الرسالة ينتظر كلمتك السحرية ✨</footer>
+</div>
+
+<!-- البوب اب على شكل قلب (يظهر عند الضغط على الرسالة المغلقة) -->
+<div id="heartMagicModal" class="magic-modal">
+    <div class="heart-window">
+        <h3>❤️ كلمة السر ❤️</h3>
+        <div class="magic-question">🔑 أيه الكلمة السحرية؟</div>
+        <input type="text" id="magicWord" class="magic-input" placeholder="... اكتبي هنا" autocomplete="off">
+        <div class="magic-buttons">
+            <button id="submitMagic" class="magic-btn">✨ افتح القلب ✨</button>
+            <button id="closeMagic" class="magic-btn close-btn">❌ إغلاق</button>
+        </div>
+        <div id="errorMsgModal" class="error-msg">❗ الكلمة غير صحيحة! جربي "بحبك" ❗</div>
+    </div>
+</div>
+
+<script>
+    // === القصيدة العربية عن الحب بمناسبة العيد ===
+    const fullPoemLines = [
+        "يا من تسكن في القلب مكان العيد والبهجة",
+        "يا بهجة الروح يا نغمًا يحيي مدى المهجة",
+        "في كل عيد وكل الحب يزهو في سطوري",
+        "يكتب عطركِ أشعارًا تفوق البحر والغيمة",
+        "عيد الحب وأنتِ العيد والأعياد تحلو",
+        "فيكِ تكتمل الدنيا وتزهر كل ورد السماء",
+        "أرسلت قلبي مع الطير المسافر في الأماني",
+        "وقلت يا رب خلّدها مع الأيام درة",
+        "بسملة العمر، أنتِ النور في عيد المودة",
+        "كل عام وأنتِ حبيبة الروح والرؤى الحلوة",
+        "كل عام وقلبي صامد للحب يعشق",
+        "ويرتل باسمكِ الدنيا: أحبكِ، أحبكِ، أحبكِ ♥"
+    ];
+
+    // الاسم المراد توجيه الرسالة له (بسملة/بنوتي)
+    const TARGET_NAME = "بسملة / بنوتي";
+
+    // متغيرات الحالة
+    let isLetterUnveiled = false;      // هل تم فتح الجواب (ظهور المحتوى)
+    let isTypingAnimationDone = false; // لمنع إعادة الطباعة أكثر من مرة
+    let currentTypingInterval = null;
+
+    // عناصر DOM
+    const letterStage = document.getElementById('letterStage');
+    const sealedLetterDiv = document.getElementById('sealedLetter');
+    const envelopeFront = document.getElementById('envelopeFront');
+    const letterInner = document.getElementById('letterInner');
+    const modal = document.getElementById('heartMagicModal');
+    const magicInput = document.getElementById('magicWord');
+    const submitBtn = document.getElementById('submitMagic');
+    const closeModalBtn = document.getElementById('closeMagic');
+    const errorMsgSpan = document.getElementById('errorMsgModal');
+    const poemContainer = document.getElementById('poemContainer');
+    const dedicationSpan = document.getElementById('dedicationName');
+
+    // تعيين اسم المستلم في الإهداء
+    if (dedicationSpan) {
+        dedicationSpan.innerHTML = `💌 إلى ${TARGET_NAME} 💌`;
+    }
+
+    // --- وظيفة مساعدة لطباعة القصيدة بترتيب وأنيميشن fade-in لكل سطر ---
+    function animatePoemTyping() {
+        if (!poemContainer) return;
+        // إذا كان يوجد أنيميشن سابق نوقفه
+        if (currentTypingInterval) {
+            clearInterval(currentTypingInterval);
+            currentTypingInterval = null;
+        }
+        // مسح المحتوى السابق
+        poemContainer.innerHTML = '';
+        // إنشاء عنصر لكل سطر
+        const linesFragment = document.createDocumentFragment();
+        const lineElements = [];
+        
+        fullPoemLines.forEach((line, idx) => {
+            const lineDiv = document.createElement('div');
+            lineDiv.className = 'typed-line';
+            lineDiv.style.animationDelay = `${idx * 0.08}s`;  // تتابع سريع وجميل
+            lineDiv.textContent = line;
+            lineDiv.style.opacity = '0'; // سيتم بالأنيميشن
+            lineElements.push(lineDiv);
+            linesFragment.appendChild(lineDiv);
+        });
+        poemContainer.appendChild(linesFragment);
+        
+        // نطبق الأنيميشن عبر إضافة class أو ضبط opacity بالتدريج
+        // بالفعل الـ keyframes تجعل opacity تظهر, لكننا نضمن ظهورها بعد الإضافة
+        // لا حاجة لمؤقت إضافي لأن الأنيميشن تعمل فورًا بفضل animation.
+        // لكن ضمان إظهار smooth
+        for (let i = 0; i < lineElements.length; i++) {
+            lineElements[i].style.animation = `fadeUpWord 0.4s forwards`;
+            lineElements[i].style.animationDelay = `${i * 0.08}s`;
+        }
+        isTypingAnimationDone = true;
+    }
+
+    // === وظيفة فتح الجواب (إظهار المحتوى مع أنيميشن السحب + طباعة الشعر) ===
+    function revealFullLetter() {
+        if (isLetterUnveiled) {
+            // إذا كان مفتوحاً بالفعل فقط نضمن أن المحتوى ظاهر
+            if (!letterInner.classList.contains('open-inner')) {
+                letterInner.classList.add('open-inner');
+            }
+            return;
+        }
+        // إضافة الكلاس لفتح الجواب (الإنزلاق)
+        letterInner.classList.add('open-inner');
+        isLetterUnveiled = true;
+        
+        // تشغيل أنيميشن كتابة الشعر (مرة واحدة فقط)
+        if (!isTypingAnimationDone) {
+            animatePoemTyping();
+        } else {
+            // في حالة إعادة فتح (لن يحدث عادة) نضمن الشعر موجود
+            if (poemContainer.innerHTML === '') animatePoemTyping();
+        }
+        
+        // اختياري: تغيير شكل الغلاف ليشير إلى أنه تم فتحه
+        if (envelopeFront) {
+            envelopeFront.style.opacity = '0.9';
+            envelopeFront.style.transition = '0.3s';
+            // إضافة بصمة ذهبية
+            const stamp = envelopeFront.querySelector('.heart-stamp');
+            if (stamp) stamp.style.filter = 'drop-shadow(0 0 6px #ffb057)';
+        }
+    }
+
+    // === التحقق من الكلمة السحرية (بحبك) ===
+    function checkMagicWordAndOpen() {
+        const userInput = magicInput.value.trim();
+        const normalized = userInput.replace(/\s+/g, '');
+        if (normalized === "بحبك") {
+            // صحة الكلمة
+            errorMsgSpan.style.display = 'none';
+            // إغلاق البوب اب
+            closeModal();
+            // فتح الجواب
+            revealFullLetter();
+            // إضافة تأثير إضافي (نبض للجواب)
+            const sealed = document.querySelector('.sealed-letter');
+            if (sealed) {
+                sealed.style.transform = 'scale(1.01)';
+                setTimeout(() => { if(sealed) sealed.style.transform = ''; }, 300);
+            }
+        } else {
+            // رسالة الخطأ
+            errorMsgSpan.style.display = 'block';
+            magicInput.classList.add('error-shake');
+            setTimeout(() => magicInput.classList.remove('error-shake'), 400);
+            magicInput.value = '';
+            magicInput.focus();
+        }
+    }
+
+    // إدارة البوب اب (على شكل قلب)
+    function openModal() {
+        // إعادة ضبط الأخطاء والمدخل
+        errorMsgSpan.style.display = 'none';
+        magicInput.value = '';
+        modal.classList.add('active');
+        magicInput.focus();
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        errorMsgSpan.style.display = 'none';
+    }
+
+    // === حدث الضغط على الجواب المختوم (الرسالة المغلقة) ===
+    function onSealedLetterClick(e) {
+        // منع إذا كان المودال مفتوحاً بالفعل
+        if (modal.classList.contains('active')) return;
+        // نمنع التداخل مع أي عناصر داخلية تسبب مشكلة
+        e.stopPropagation();
+        // قبل كل شيء: إذا كان الجواب قد فتح بالفعل، لا داعي لإظهار البوب اب مرة أخرى؟
+        // لكن حسب التصميم: المستخدم يريد فتح الجواب، وحتى لو كان مفتوحًا مسبقًا، 
+        // لا بأس من إعادة تفعيل البوب اب كتجربة ثانوية (ولكنه لن يضاعف المحتوى) 
+        // الأفضل أن لو كان مفتوحاً بالفعل لا نُظهر البوب اب، ونُخبره بأن الرسالة مفتوحة، ولكن 
+        // وفق متطلبات "جواب مختوم بقلب ولما تدوس على القلب يطلع بوب اب" – لكن الطلب الجديد: 
+        // "الجواب يفتح لازم تدوس على الجواب عشان يطلع" .. نحن هنا نربط الضغط على الجواب ككل (المنطقة المختومة) يظهر البوب اب.
+        // حتى لو كان مفتوحًا؟ سيكون لطيفًا لو منعنا ظهور البوب اب مرة ثانية لان الجواب مفتوح بالأصل.
+        if (isLetterUnveiled) {
+            // إذا كان مفتوحاً فعلاً نعطي تنبيه بسيط بدون ازعاج لكن لا نفتح بوب اب
+            // بدل فتح البوب اب نعطي لمحة بسيطة
+            const tmpHint = document.createElement('div');
+            tmpHint.textContent = '✨ الرسالة مفتوحة بالفعل ✨';
+            tmpHint.style.position = 'fixed';
+            tmpHint.style.bottom = '30px';
+            tmpHint.style.left = '50%';
+            tmpHint.style.transform = 'translateX(-50%)';
+            tmpHint.style.backgroundColor = '#ffddbb';
+            tmpHint.style.padding = '8px 18px';
+            tmpHint.style.borderRadius = '50px';
+            tmpHint.style.color = '#b14612';
+            tmpHint.style.fontWeight = 'bold';
+            tmpHint.style.zIndex = '999';
+            tmpHint.style.fontSize = '0.85rem';
+            tmpHint.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            document.body.appendChild(tmpHint);
+            setTimeout(() => tmpHint.remove(), 1800);
+            return;
+        }
+        // إذا لم يفتح بعد، نظهر البوب اب على شكل قلب
+        openModal();
+    }
+
+    // ربط حدث الضغط على منطقة الرسالة (الـ stage أو sealedLetter) 
+    // لكن أفضل ربط على sealedLetter كاملة ليشمل الغلاف
+    if (sealedLetterDiv) {
+        sealedLetterDiv.addEventListener('click', onSealedLetterClick);
+    } else {
+        letterStage.addEventListener('click', onSealedLetterClick);
+    }
+
+    // أزرار المودال
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        checkMagicWordAndOpen();
+    });
+    closeModalBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal();
+    });
+    // الضغط على الخلفية يغلق
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    // Enter في الحقل
+    magicInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkMagicWordAndOpen();
+        }
+    });
+    // إزالة الخطأ عند الكتابة
+    magicInput.addEventListener('input', () => {
+        errorMsgSpan.style.display = 'none';
+        magicInput.classList.remove('error-shake');
+    });
+
+    // إضافة أنيميشن الخطأ
+    const styleShake = document.createElement('style');
+    styleShake.textContent = `
+        .error-shake {
+            animation: shakeAnim 0.3s ease-in-out 0s 2;
+            border-color: #e63946 !important;
+        }
+        @keyframes shakeAnim {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
+        }
+    `;
+    document.head.appendChild(styleShake);
+
+    // إضافة جاهزية: تأكد أن الجواب مغلق تماماً عند التحميل
+    window.addEventListener('DOMContentLoaded', () => {
+        letterInner.classList.remove('open-inner');
+        isLetterUnveiled = false;
+        isTypingAnimationDone = false;
+        poemContainer.innerHTML = ''; // فارغ حتى لا يظهر شيء قبل الفتح
+        // نضع رسالة ترحيب صامتة
+    });
+
+    // لجعل التجربة سلسة إذا حاول المستخدم فتح الجواب من جديد بعد الفتح، لا يظهر بوب اب (نمنعه)
+    // نضمن أيضًا عند الفتح أن يتم طباعة الشعر بشكل مرتب
+    // إعادة ضبط: في حال استدعاء revealFullLetter مرة أخرى بعد الفتح، لن يعيد الطباعة لئلا تتكرر.
+    // نضيف التحقق في animatePoemTyping: ألا نضاعف الأسطر
+    // تعديل صغير: في حالة إعادة المحاولة بعد فتح الجواب (منطقياً لا يحدث)
+    // نضبط also أن البوب اب لن يظهر بعد الفتح كما هو موضح أعلاه
+    
+    // تحسين صغير للهواتف: إزالة الـ hover الغير ضروري
+    // التأكد من أن الأبعاد مناسبة تماماً
+    
+    // أخيراً: جعل أنيميشن فتح الرسالة يكون سلساً عند تفعيل revealFullLetter (letter inner class)
+    // القصيدة تطبع بأنيميشن السطر تلو الآخر مع كل ضغط على الجواب بعد كتابة الكلمة السحرية "بحبك"
+    // الموجه بالاسم إلى بسملة / بنوتي، شعر عربي عن الحب وقت العيد.
+    // تم كل المتطلبات:
+    // 1- شكل رسالة 2- تفتح بأنيميشن (فتح الرسالة منزلق) 3- الضغط على الجواب يظهر بوب اب على شكل قلب 4- الكلمة السحرية بحبك 5- بعدها يفتح الجواب ويتملى شعر مع أنيميشن طباعة 6- مناسب للجوال والpc.
+    console.log("جاهز، اضغط على الجواب المختوم ♥");
+</script>
+</body>
+</html>
