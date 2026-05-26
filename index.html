@@ -17,7 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 16px;
         }
 
@@ -55,8 +55,6 @@
             margin-bottom: 8px;
             animation: gentleBeat 1.8s infinite ease-in-out;
             transform-origin: center;
-            color: #e34234;
-            text-shadow: 0 0 5px #ffaaaa;
         }
 
         @keyframes gentleBeat {
@@ -74,7 +72,7 @@
             color: #b64516;
             box-shadow: inset 0 1px 3px #ffcf9a, 0 3px 8px rgba(0,0,0,0.05);
             margin-top: 8px;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .click-hint {
@@ -88,7 +86,7 @@
             padding: 8px 24px;
             border-radius: 40px;
             font-weight: 500;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .letter-inner {
@@ -118,15 +116,21 @@
         .letter-inner.open-inner .heart-page-btn-container button {
             pointer-events: auto;
         }
+        .letter-inner.open-inner .poem-box,
+        .letter-inner.open-inner .greeting-title,
+        .letter-inner.open-inner .heart-decoration,
+        .letter-inner.open-inner .future-husband-line {
+            pointer-events: none;
+            user-select: text;
+        }
 
         .greeting-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #bb511d;
             text-align: center;
             margin: 10px 0 20px;
             font-weight: bold;
-            letter-spacing: 1px;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .poem-wrapper {
@@ -144,9 +148,9 @@
             pointer-events: none;
         }
         .poem-box {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
             color: #3e2a1c;
             background: #fffaf2;
             padding: 20px 18px;
@@ -174,14 +178,14 @@
         .heart-decoration {
             text-align: center;
             margin: 15px 0 10px;
-            font-size: 20px;
+            font-size: 18px;
             letter-spacing: 6px;
             color: #e34234;
         }
 
         .future-husband-line {
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #bd4817;
             margin: 12px 0 20px;
             font-weight: 500;
@@ -190,8 +194,7 @@
             border-radius: 60px;
             display: inline-block;
             width: auto;
-            letter-spacing: 0.3px;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .heart-page-btn-container {
@@ -207,7 +210,7 @@
             padding: 10px 24px;
             border-radius: 60px;
             cursor: pointer;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: transform 0.2s, background 0.2s;
         }
@@ -232,7 +235,7 @@
             padding: 10px 24px;
             border-radius: 60px;
             cursor: pointer;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
             transition: transform 0.2s, background 0.2s;
             background: #5a3e2b;
@@ -240,64 +243,6 @@
         .close-letter-action:hover {
             background: #402c1d;
             transform: scale(0.97);
-        }
-
-        .overlay-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0.3s, opacity 0.3s ease;
-        }
-        .overlay-page.active {
-            visibility: visible;
-            opacity: 1;
-        }
-        .heart-shatora {
-            background: linear-gradient(145deg, #ffc8a2, #ffaa77);
-            width: 340px;
-            max-width: 85vw;
-            border-radius: 45% 45% 45% 45% / 55% 55% 45% 45%;
-            text-align: center;
-            padding: 40px 20px 45px;
-            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #e34234;
-            animation: popScale 0.4s ease-out;
-        }
-        @keyframes popScale {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .shatora-text {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #8b2c16;
-            margin-bottom: 35px;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-        .shatora-btn {
-            background: #e34234;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 10px 28px;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-        .shatora-btn:hover {
-            transform: scale(0.96);
-            background: #c52e1f;
         }
 
         .magic-modal {
@@ -315,6 +260,7 @@
             visibility: hidden;
             opacity: 0;
             transition: visibility 0.2s, opacity 0.25s ease;
+            cursor: default;
         }
 
         .magic-modal.active {
@@ -329,7 +275,7 @@
             border-radius: 45% 45% 45% 45% / 55% 55% 45% 45%;
             text-align: center;
             padding: 35px 20px 45px;
-            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #e34234;
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #ff8c42;
             animation: popHeart 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
         }
 
@@ -339,6 +285,13 @@
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
+        .heart-window h3 {
+            font-size: 1.7rem;
+            color: #8b2c16;
+            margin-bottom: 6px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         .magic-question {
             background: #fff2e4;
             border-radius: 50px;
@@ -346,39 +299,52 @@
             margin: 18px 0;
             font-weight: bold;
             color: #b14512;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .magic-input {
             width: 85%;
             padding: 12px;
             border-radius: 60px;
             border: none;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #fffbf5;
             border: 2px solid #ffbc7a;
             outline: none;
-            font-family: 'Segoe UI', system-ui, sans-serif;
         }
+
+        .magic-input:focus {
+            border-color: #e35f21;
+            box-shadow: 0 0 0 3px #ffddb0;
+        }
+
         .magic-buttons {
             display: flex;
             justify-content: center;
             gap: 14px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
+
         .magic-btn {
-            background: #e34234;
+            background: #d9531e;
             border: none;
             color: white;
+            font-weight: bold;
             padding: 8px 22px;
             border-radius: 40px;
+            font-size: 0.9rem;
             cursor: pointer;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .magic-btn:hover {
-            background: #c52e1f;
+
+        .magic-btn.close-btn {
+            background: #9e451f;
         }
+
         .error-msg {
             color: #b12a0c;
             background: #fff0e0;
@@ -386,23 +352,26 @@
             padding: 5px;
             font-size: 0.8rem;
             margin-top: 12px;
+            font-weight: bold;
             display: none;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         @media (max-width: 550px) {
             .envelope-front { padding: 1.5rem 1rem 1.5rem; }
             .heart-seal-main { font-size: 70px; }
-            .poem-box { font-size: 0.95rem; }
-            .greeting-title { font-size: 1.5rem; }
-            .shatora-text { font-size: 2.2rem; }
+            .seal-title { font-size: 1.1rem; }
+            .poem-box { font-size: 0.9rem; }
+            .greeting-title { font-size: 1.3rem; }
+            .future-husband-line { font-size: 0.7rem; padding: 3px 12px; }
         }
+
         footer {
             text-align: center;
             font-size: 0.7rem;
             color: #c08152;
             margin-top: 20px;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
     </style>
 </head>
@@ -411,13 +380,13 @@
 <div class="letter-stage">
     <div class="sealed-letter" id="sealedLetter">
         <div class="envelope-front" id="envelopeFront">
-            <div class="heart-seal-main">♥</div>
+            <div class="heart-seal-main">❤️‍🔥</div>
             <div class="seal-title">For My Moon</div>
-            <div class="click-hint">  هنا هنا دوسي هنا </div>
+            <div class="click-hint">هنا هنا تعالي دوسي هنا</div>
         </div>
 
         <div class="letter-inner" id="letterInner">
-            <div class="greeting-title"> هيهي عشان بنوتي😝💜</div>
+            <div class="greeting-title">هيهي عشان بنووتييي </div>
             
             <div class="poem-wrapper" id="poemWrapper">
                 <div id="poemFirst" class="poem-slide">
@@ -437,31 +406,25 @@
             <div style="text-align: center;">
                 <div class="future-husband-line">forever yours, your future husband😝</div>
             </div>
+
             <div class="buttons-area">
-                <button id="closeLetterBtn" class="close-letter-action">اغلاق الرسالة</button>
+                <button id="closeLetterBtn" class="close-letter-action">خلاص هش هش</button>
             </div>
         </div>
     </div>
-    <footer>Made By Dio - Just For You My Future Wifie💜</footer>
-</div>
-
-<div id="shatoraPage" class="overlay-page">
-    <div class="heart-shatora">
-        <div class="shatora-text">شطوورة</div>
-        <button id="shatoraBtn" class="shatora-btn">دوسي عليا</button>
-    </div>
+    <footer> Made by dio - omly for my moon😝💜</footer>
 </div>
 
 <div id="heartMagicModal" class="magic-modal">
     <div class="heart-window">
-        <h3>هنممم عايزة تدخلي؟؟ </h3>
+        <h3>هنمممم عايزة تدخلي؟ </h3>
         <div class="magic-question">ايه الكلمة السحرية؟</div>
         <input type="text" id="magicWord" class="magic-input" placeholder="اكتبي هنا ..." autocomplete="off">
         <div class="magic-buttons">
-            <button id="submitMagic" class="magic-btn">افتح الجواب</button>
-            <button id="closeMagic" class="magic-btn">اغلاق</button>
+            <button id="submitMagic" class="magic-btn">نجرب؟ </button>
+            <button id="closeMagic" class="magic-btn close-btn">وهه هتمشي؟؟</button>
         </div>
-        <div id="errorMsgModal" class="error-msg">عبيطة الكلمة غلط، جربي بحبك</div>
+        <div id="errorMsgModal" class="error-msg">عبيطة، طب متجربي بحبك</div>
     </div>
 </div>
 
@@ -511,8 +474,6 @@
     const poemFirstDiv = document.getElementById('poemFirst');
     const poemSecondDiv = document.getElementById('poemSecond');
     const closeLetterBtn = document.getElementById('closeLetterBtn');
-    const shatoraPage = document.getElementById('shatoraPage');
-    const shatoraBtn = document.getElementById('shatoraBtn');
     const extraHeartBtn = document.getElementById('extraHeartBtn');
 
     if (poemContainerSecond) {
@@ -596,16 +557,6 @@
         }
         if (envelopeFront) envelopeFront.style.opacity = '1';
         closeModal();
-        shatoraPage.classList.remove('active');
-    }
-
-    function showShatoraPage() {
-        shatoraPage.classList.add('active');
-    }
-
-    function closeShatoraAndOpenLetter() {
-        shatoraPage.classList.remove('active');
-        revealActualLetter();
     }
 
     function checkMagicAndOpen() {
@@ -613,7 +564,7 @@
         if (userWord.replace(/\s+/g, '') === "بحبك") {
             errorMsgSpan.style.display = 'none';
             closeModal();
-            showShatoraPage();
+            revealActualLetter();
         } else {
             errorMsgSpan.style.display = 'block';
             magicInput.classList.add('error-shake');
@@ -643,7 +594,6 @@
     magicInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkMagicAndOpen(); });
     magicInput.addEventListener('input', () => { errorMsgSpan.style.display = 'none'; magicInput.classList.remove('error-shake'); });
     closeLetterBtn.addEventListener('click', (e) => { e.preventDefault(); fullyCloseLetter(); });
-    shatoraBtn.addEventListener('click', (e) => { e.preventDefault(); closeShatoraAndOpenLetter(); });
     extraHeartBtn.addEventListener('click', (e) => { 
         e.preventDefault(); 
         e.stopPropagation(); 
