@@ -17,7 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', 'Tahoma', 'Cairo', 'Amiri', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             padding: 16px;
         }
 
@@ -28,7 +28,6 @@
             perspective: 1200px;
         }
 
-        /* الرسالة المغلقة */
         .sealed-letter {
             background: #fffef5;
             border-radius: 32px;
@@ -56,6 +55,8 @@
             margin-bottom: 8px;
             animation: gentleBeat 1.8s infinite ease-in-out;
             transform-origin: center;
+            color: #e34234;
+            text-shadow: 0 0 5px #ffaaaa;
         }
 
         @keyframes gentleBeat {
@@ -73,7 +74,7 @@
             color: #b64516;
             box-shadow: inset 0 1px 3px #ffcf9a, 0 3px 8px rgba(0,0,0,0.05);
             margin-top: 8px;
-            font-family: 'Segoe UI', 'Cairo', monospace;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         .click-hint {
@@ -87,12 +88,9 @@
             padding: 8px 24px;
             border-radius: 40px;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
-        /* المحتوى الداخلي للرسالة */
         .letter-inner {
             max-height: 0;
             opacity: 0;
@@ -105,29 +103,22 @@
         }
 
         .letter-inner.open-inner {
-            max-height: 1200px;
+            max-height: 1400px;
             opacity: 1;
             padding: 28px 24px 42px;
             border-top: 3px solid #ffc489;
         }
 
-        /* منع أي تفاعل داخل الجواب غير الزر */
         .letter-inner {
             pointer-events: none;
         }
         .letter-inner.open-inner .buttons-area,
-        .letter-inner.open-inner .buttons-area button {
+        .letter-inner.open-inner .buttons-area button,
+        .letter-inner.open-inner .heart-page-btn-container,
+        .letter-inner.open-inner .heart-page-btn-container button {
             pointer-events: auto;
         }
-        .letter-inner.open-inner .poem-box,
-        .letter-inner.open-inner .greeting-title,
-        .letter-inner.open-inner .heart-decoration,
-        .letter-inner.open-inner .future-husband-line {
-            pointer-events: none;
-            user-select: text;
-        }
 
-        /* تنسيقات داخل الجواب */
         .greeting-title {
             font-size: 1.8rem;
             color: #bb511d;
@@ -135,22 +126,37 @@
             margin: 10px 0 20px;
             font-weight: bold;
             letter-spacing: 1px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
+        .poem-wrapper {
+            position: relative;
+            min-height: 350px;
+            overflow: hidden;
+        }
+        .poem-slide {
+            width: 100%;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .poem-slide.fade-out-right {
+            transform: translateX(50px);
+            opacity: 0;
+            pointer-events: none;
+        }
         .poem-box {
-            font-family: 'Amiri', 'Tahoma', 'Segoe UI', serif;
-            font-size: 1.2rem;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 1.1rem;
             line-height: 1.9;
             color: #3e2a1c;
             background: #fffaf2;
             padding: 20px 18px;
             border-radius: 32px;
-            margin: 20px 0;
             text-align: center;
             white-space: pre-line;
             direction: rtl;
             border: 1px solid #ffe0bd;
             box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            margin: 0;
         }
 
         .typed-line {
@@ -161,14 +167,8 @@
         }
 
         @keyframes fadeUpWord {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .heart-decoration {
@@ -176,9 +176,9 @@
             margin: 15px 0 10px;
             font-size: 20px;
             letter-spacing: 6px;
+            color: #e34234;
         }
 
-        /* تنسيق forever yours - مصغر ومنسدل زي باقي النص */
         .future-husband-line {
             text-align: center;
             font-size: 0.85rem;
@@ -191,9 +191,34 @@
             display: inline-block;
             width: auto;
             letter-spacing: 0.3px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
-        /* منطقة الزر الوحيد (إغلاق الرسالة) */
+        .heart-page-btn-container {
+            text-align: center;
+            margin: 15px 0 10px;
+        }
+        .heart-page-button {
+            background: #e34234;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 24px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .heart-page-button:hover {
+            background: #c52e1f;
+            transform: scale(0.96);
+        }
+        .heart-page-button.hidden-btn {
+            display: none;
+        }
+
         .buttons-area {
             display: flex;
             justify-content: center;
@@ -207,7 +232,7 @@
             padding: 10px 24px;
             border-radius: 60px;
             cursor: pointer;
-            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
             transition: transform 0.2s, background 0.2s;
             background: #5a3e2b;
@@ -216,11 +241,65 @@
             background: #402c1d;
             transform: scale(0.97);
         }
-        .close-letter-action:active {
-            transform: scale(0.95);
+
+        .overlay-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s, opacity 0.3s ease;
+        }
+        .overlay-page.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .heart-shatora {
+            background: linear-gradient(145deg, #ffc8a2, #ffaa77);
+            width: 340px;
+            max-width: 85vw;
+            border-radius: 45% 45% 45% 45% / 55% 55% 45% 45%;
+            text-align: center;
+            padding: 40px 20px 45px;
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #e34234;
+            animation: popScale 0.4s ease-out;
+        }
+        @keyframes popScale {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .shatora-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8b2c16;
+            margin-bottom: 35px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        .shatora-btn {
+            background: #e34234;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        .shatora-btn:hover {
+            transform: scale(0.96);
+            background: #c52e1f;
         }
 
-        /* بوب اب كلمة السر */
         .magic-modal {
             position: fixed;
             top: 0;
@@ -236,7 +315,6 @@
             visibility: hidden;
             opacity: 0;
             transition: visibility 0.2s, opacity 0.25s ease;
-            cursor: default;
         }
 
         .magic-modal.active {
@@ -251,7 +329,7 @@
             border-radius: 45% 45% 45% 45% / 55% 55% 45% 45%;
             text-align: center;
             padding: 35px 20px 45px;
-            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #ff8c42;
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.3), 0 0 0 10px #fff5e6, 0 0 0 14px #e34234;
             animation: popHeart 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
         }
 
@@ -261,12 +339,6 @@
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
-        .heart-window h3 {
-            font-size: 1.9rem;
-            color: #8b2c16;
-            margin-bottom: 6px;
-        }
-
         .magic-question {
             background: #fff2e4;
             border-radius: 50px;
@@ -274,9 +346,8 @@
             margin: 18px 0;
             font-weight: bold;
             color: #b14512;
-            font-size: 1rem;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
-
         .magic-input {
             width: 85%;
             padding: 12px;
@@ -284,40 +355,30 @@
             border: none;
             text-align: center;
             font-size: 1.1rem;
-            font-family: inherit;
             background: #fffbf5;
             border: 2px solid #ffbc7a;
             outline: none;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
-
-        .magic-input:focus {
-            border-color: #e35f21;
-            box-shadow: 0 0 0 3px #ffddb0;
-        }
-
         .magic-buttons {
             display: flex;
             justify-content: center;
             gap: 14px;
             margin-top: 20px;
-            flex-wrap: wrap;
         }
-
         .magic-btn {
-            background: #d9531e;
+            background: #e34234;
             border: none;
             color: white;
-            font-weight: bold;
             padding: 8px 22px;
             border-radius: 40px;
-            font-size: 0.9rem;
             cursor: pointer;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-weight: bold;
         }
-
-        .magic-btn.close-btn {
-            background: #9e451f;
+        .magic-btn:hover {
+            background: #c52e1f;
         }
-
         .error-msg {
             color: #b12a0c;
             background: #fff0e0;
@@ -325,24 +386,23 @@
             padding: 5px;
             font-size: 0.8rem;
             margin-top: 12px;
-            font-weight: bold;
             display: none;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         @media (max-width: 550px) {
             .envelope-front { padding: 1.5rem 1rem 1.5rem; }
             .heart-seal-main { font-size: 70px; }
-            .seal-title { font-size: 1.1rem; }
-            .poem-box { font-size: 1rem; }
+            .poem-box { font-size: 0.95rem; }
             .greeting-title { font-size: 1.5rem; }
-            .future-husband-line { font-size: 0.75rem; padding: 3px 12px; }
+            .shatora-text { font-size: 2.2rem; }
         }
-
         footer {
             text-align: center;
             font-size: 0.7rem;
             color: #c08152;
             margin-top: 20px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
     </style>
 </head>
@@ -351,54 +411,62 @@
 <div class="letter-stage">
     <div class="sealed-letter" id="sealedLetter">
         <div class="envelope-front" id="envelopeFront">
-            <div class="heart-seal-main">❤️‍🔥</div>
+            <div class="heart-seal-main">♥</div>
             <div class="seal-title">For My Moon</div>
-            <div class="click-hint">
-                <span>💖 اضغط على الرسالة لفتحها 💖</span>
-            </div>
+            <div class="click-hint">  هنا هنا دوسي هنا </div>
         </div>
 
-        <!-- المحتوى الداخلي (يظهر بعد الكلمة السحرية) -->
         <div class="letter-inner" id="letterInner">
-            <div class="greeting-title">💌 إلى بنوتي 💌</div>
+            <div class="greeting-title"> هيهي عشان بنوتي😝💜</div>
             
-            <div class="poem-box" id="poemContainer">
-                <!-- القصيدة ستظهر بأنيميشن -->
+            <div class="poem-wrapper" id="poemWrapper">
+                <div id="poemFirst" class="poem-slide">
+                    <div class="poem-box" id="poemContainerFirst"></div>
+                </div>
+                <div id="poemSecond" class="poem-slide" style="display: none;">
+                    <div class="poem-box" id="poemContainerSecond"></div>
+                </div>
             </div>
             
-            <div class="heart-decoration">❤️🌙❤️</div>
+            <div class="heart-decoration">♥ ♥ ♥</div>
             
-            <!-- forever yours بحجم صغير ومنسدل -->
-            <div style="text-align: center;">
-                <div class="future-husband-line">forever yours, your future husband</div>
+            <div class="heart-page-btn-container">
+                <button id="extraHeartBtn" class="heart-page-button">هيهي دوسي هنا</button>
             </div>
 
-            <!-- زر واحد فقط: إغلاق الرسالة -->
+            <div style="text-align: center;">
+                <div class="future-husband-line">forever yours, your future husband😝</div>
+            </div>
             <div class="buttons-area">
-                <button id="closeLetterBtn" class="close-letter-action">إغلاق الرسالة</button>
+                <button id="closeLetterBtn" class="close-letter-action">اغلاق الرسالة</button>
             </div>
         </div>
     </div>
-    <footer>🌙 رسالة مختومة بقلب - كلمتك السحرية تفتحها 🌙</footer>
+    <footer>Made By Dio - Just For You My Future Wifie💜</footer>
 </div>
 
-<!-- بوب اب كلمة السر -->
+<div id="shatoraPage" class="overlay-page">
+    <div class="heart-shatora">
+        <div class="shatora-text">شطوورة</div>
+        <button id="shatoraBtn" class="shatora-btn">دوسي عليا</button>
+    </div>
+</div>
+
 <div id="heartMagicModal" class="magic-modal">
     <div class="heart-window">
-        <h3>❤️ كلمة السر ❤️</h3>
-        <div class="magic-question">🔑 أيه الكلمة السحرية؟</div>
+        <h3>هنممم عايزة تدخلي؟؟ </h3>
+        <div class="magic-question">ايه الكلمة السحرية؟</div>
         <input type="text" id="magicWord" class="magic-input" placeholder="اكتبي هنا ..." autocomplete="off">
         <div class="magic-buttons">
-            <button id="submitMagic" class="magic-btn">✨ افتح الجواب ✨</button>
-            <button id="closeMagic" class="magic-btn close-btn">❌ إغلاق</button>
+            <button id="submitMagic" class="magic-btn">افتح الجواب</button>
+            <button id="closeMagic" class="magic-btn">اغلاق</button>
         </div>
-        <div id="errorMsgModal" class="error-msg">❗ الكلمة غير صحيحة! جربي "بحبك" ❗</div>
+        <div id="errorMsgModal" class="error-msg">عبيطة الكلمة غلط، جربي بحبك</div>
     </div>
 </div>
 
 <script>
-    // القصيدة الكاملة
-    const fullPoemLines = [
+    const firstPoemLines = [
         "يا قمراً يسكنُ روحي و يضيءُ ليلي",
         "في العيدِ تزدادُ حروفُ الشوقِ وتكتملُ",
         "كلُ عامٍ و أنتِ نبضُ القلبِ والفرحُ الكبيرْ",
@@ -410,13 +478,26 @@
         "كلُّ عامٍ و أنتِ لي الدنيا و ما فيها",
         "أعدُّ النجومَ لأهديكِ فرحاً بلا حدود",
         "و أقولُ لقلبي: اسكنْ في حُبِّ بنوتي",
-        "فـ هي القمرُ الذي أضاءَ مستقبلي 🌙💖"
+        "فـ هي القمرُ الذي أضاءَ مستقبلي"
     ];
+
+    const secondPoemText = `يا حبيبة القلب و نبض الأماني
+في عيونك لقيت عمري و أفراح الزمان
+كل ثانية معاكي بتكتب أجمل معاني
+و حبك فجر في دنيتي ألف حنان
+
+أنتِ اللي نورتي ليلي و صباحي فرح
+و بوجودك بقى العيد أجمل في كل وقت
+أحتضن حلمي و أقول للدنيا: إسمعي
+هي بنوتي و الله ما أحلى البشر
+
+كل عيد و انت عيدي، بحبك يبنوتي`;
 
     let isLetterUnveiled = false;
     let isTypingAnimationDone = false;
+    let isSecondPoemShowing = false;
+    let isTransitioning = false;
 
-    // عناصر DOM
     const sealedLetter = document.getElementById('sealedLetter');
     const envelopeFront = document.getElementById('envelopeFront');
     const letterInner = document.getElementById('letterInner');
@@ -425,16 +506,25 @@
     const submitBtn = document.getElementById('submitMagic');
     const closeModalBtn = document.getElementById('closeMagic');
     const errorMsgSpan = document.getElementById('errorMsgModal');
-    const poemContainer = document.getElementById('poemContainer');
+    const poemContainerFirst = document.getElementById('poemContainerFirst');
+    const poemContainerSecond = document.getElementById('poemContainerSecond');
+    const poemFirstDiv = document.getElementById('poemFirst');
+    const poemSecondDiv = document.getElementById('poemSecond');
     const closeLetterBtn = document.getElementById('closeLetterBtn');
+    const shatoraPage = document.getElementById('shatoraPage');
+    const shatoraBtn = document.getElementById('shatoraBtn');
+    const extraHeartBtn = document.getElementById('extraHeartBtn');
 
-    // طباعة القصيدة بأنيميشن
-    function animatePoemTyping() {
-        if (!poemContainer) return;
-        poemContainer.innerHTML = '';
+    if (poemContainerSecond) {
+        poemContainerSecond.innerText = secondPoemText;
+    }
+
+    function animateFirstPoem() {
+        if (!poemContainerFirst) return;
+        poemContainerFirst.innerHTML = '';
         const fragment = document.createDocumentFragment();
         const lineDivs = [];
-        fullPoemLines.forEach((line, idx) => {
+        firstPoemLines.forEach((line, idx) => {
             const lineDiv = document.createElement('div');
             lineDiv.className = 'typed-line';
             lineDiv.textContent = line;
@@ -442,7 +532,7 @@
             lineDivs.push(lineDiv);
             fragment.appendChild(lineDiv);
         });
-        poemContainer.appendChild(fragment);
+        poemContainerFirst.appendChild(fragment);
         for (let i = 0; i < lineDivs.length; i++) {
             lineDivs[i].style.animation = `fadeUpWord 0.4s forwards`;
             lineDivs[i].style.animationDelay = `${i * 0.07}s`;
@@ -450,52 +540,80 @@
         isTypingAnimationDone = true;
     }
 
-    // فتح الجواب
-    function revealFullLetter() {
+    function switchToSecondPoem() {
+        if (isTransitioning || isSecondPoemShowing) return;
+        isTransitioning = true;
+        
+        if (extraHeartBtn) {
+            extraHeartBtn.classList.add('hidden-btn');
+        }
+        
+        poemFirstDiv.classList.add('fade-out-right');
+        setTimeout(() => {
+            poemFirstDiv.style.display = 'none';
+            poemSecondDiv.style.display = 'block';
+            isSecondPoemShowing = true;
+            isTransitioning = false;
+        }, 500);
+    }
+
+    function revealActualLetter() {
         if (!letterInner.classList.contains('open-inner')) {
             letterInner.classList.add('open-inner');
         }
         if (!isLetterUnveiled) {
             isLetterUnveiled = true;
             if (!isTypingAnimationDone) {
-                animatePoemTyping();
-            } else if (poemContainer.innerHTML === '' || poemContainer.children.length === 0) {
-                animatePoemTyping();
+                animateFirstPoem();
             }
             if (envelopeFront) {
                 envelopeFront.style.opacity = '0.95';
-                const heartIcon = envelopeFront.querySelector('.heart-seal-main');
-                if (heartIcon) heartIcon.style.filter = 'drop-shadow(0 0 8px #ff8080)';
             }
-        } else {
-            if (!isTypingAnimationDone && poemContainer.children.length === 0) {
-                animatePoemTyping();
+        }
+        if (isSecondPoemShowing) {
+            poemFirstDiv.style.display = 'block';
+            poemSecondDiv.style.display = 'none';
+            poemFirstDiv.classList.remove('fade-out-right');
+            isSecondPoemShowing = false;
+            if (extraHeartBtn) {
+                extraHeartBtn.classList.remove('hidden-btn');
             }
         }
     }
 
-    // إغلاق الرسالة والعودة للبداية
     function fullyCloseLetter() {
         letterInner.classList.remove('open-inner');
         isLetterUnveiled = false;
         isTypingAnimationDone = false;
-        poemContainer.innerHTML = '';
-        if (envelopeFront) {
-            envelopeFront.style.opacity = '1';
-            const heartIcon = envelopeFront.querySelector('.heart-seal-main');
-            if (heartIcon) heartIcon.style.filter = 'drop-shadow(0 8px 15px rgba(0, 0, 0, 0.2))';
+        if (poemContainerFirst) poemContainerFirst.innerHTML = '';
+        poemFirstDiv.style.display = 'block';
+        poemSecondDiv.style.display = 'none';
+        poemFirstDiv.classList.remove('fade-out-right');
+        isSecondPoemShowing = false;
+        isTransitioning = false;
+        if (extraHeartBtn) {
+            extraHeartBtn.classList.remove('hidden-btn');
         }
+        if (envelopeFront) envelopeFront.style.opacity = '1';
         closeModal();
+        shatoraPage.classList.remove('active');
     }
 
-    // التحقق من كلمة السر "بحبك"
+    function showShatoraPage() {
+        shatoraPage.classList.add('active');
+    }
+
+    function closeShatoraAndOpenLetter() {
+        shatoraPage.classList.remove('active');
+        revealActualLetter();
+    }
+
     function checkMagicAndOpen() {
         const userWord = magicInput.value.trim();
-        const normalized = userWord.replace(/\s+/g, '');
-        if (normalized === "بحبك") {
+        if (userWord.replace(/\s+/g, '') === "بحبك") {
             errorMsgSpan.style.display = 'none';
             closeModal();
-            revealFullLetter();
+            showShatoraPage();
         } else {
             errorMsgSpan.style.display = 'block';
             magicInput.classList.add('error-shake');
@@ -518,71 +636,39 @@
         errorMsgSpan.style.display = 'none';
     }
 
-    // الضغط على الرسالة المختومة
-    function onSealedClickHandler(e) {
-        if (isLetterUnveiled) return;
-        e.stopPropagation();
-        openModal();
-    }
-
-    if (sealedLetter) {
-        sealedLetter.addEventListener('click', onSealedClickHandler);
-    }
-
-    // أحداث البوب اب
-    submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        checkMagicAndOpen();
-    });
-    closeModalBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        closeModal();
-    });
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-    magicInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            checkMagicAndOpen();
+    sealedLetter.addEventListener('click', (e) => { if (!isLetterUnveiled) openModal(); });
+    submitBtn.addEventListener('click', (e) => { e.preventDefault(); checkMagicAndOpen(); });
+    closeModalBtn.addEventListener('click', (e) => { e.preventDefault(); closeModal(); });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    magicInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkMagicAndOpen(); });
+    magicInput.addEventListener('input', () => { errorMsgSpan.style.display = 'none'; magicInput.classList.remove('error-shake'); });
+    closeLetterBtn.addEventListener('click', (e) => { e.preventDefault(); fullyCloseLetter(); });
+    shatoraBtn.addEventListener('click', (e) => { e.preventDefault(); closeShatoraAndOpenLetter(); });
+    extraHeartBtn.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        if (isLetterUnveiled && !isSecondPoemShowing && !isTransitioning) {
+            switchToSecondPoem();
         }
     });
-    magicInput.addEventListener('input', () => {
-        errorMsgSpan.style.display = 'none';
-        magicInput.classList.remove('error-shake');
-    });
 
-    // زر إغلاق الرسالة
-    if (closeLetterBtn) {
-        closeLetterBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            fullyCloseLetter();
-        });
-    }
-
-    // أنيميشن اهتزاز للخطأ
     const styleShake = document.createElement('style');
     styleShake.textContent = `
-        .error-shake {
-            animation: shakeAnim 0.3s ease-in-out 0s 2;
-            border-color: #e63946 !important;
-        }
-        @keyframes shakeAnim {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-            100% { transform: translateX(0); }
-        }
+        .error-shake { animation: shakeAnim 0.3s ease-in-out 0s 2; border-color: #e63946 !important; }
+        @keyframes shakeAnim { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } 100% { transform: translateX(0); } }
+        .hidden-btn { display: none; }
     `;
     document.head.appendChild(styleShake);
 
-    // التأكد من الحالة الأولية
     window.addEventListener('DOMContentLoaded', () => {
         letterInner.classList.remove('open-inner');
         isLetterUnveiled = false;
-        isTypingAnimationDone = false;
-        poemContainer.innerHTML = '';
+        poemFirstDiv.style.display = 'block';
+        poemSecondDiv.style.display = 'none';
+        isSecondPoemShowing = false;
+        if (extraHeartBtn) {
+            extraHeartBtn.classList.remove('hidden-btn');
+        }
     });
 </script>
 </body>
